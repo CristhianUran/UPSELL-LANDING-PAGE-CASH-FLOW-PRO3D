@@ -259,3 +259,38 @@ h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); }
     opacity: 0;
   }
 }
+
+/* Hotmart Widget Styling */
+.custom-hotmart-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.custom-hotmart-wrapper a,
+.custom-hotmart-wrapper button {
+  background: linear-gradient(to right, var(--accent-blue), #2563EB) !important;
+  color: #fff !important;
+  padding: 1.2rem 2.5rem !important;
+  border-radius: 50px !important;
+  font-size: 1.1rem !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  text-decoration: none !important;
+  border: none !important;
+  cursor: pointer !important;
+  box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4) !important;
+  transition: all 0.3s ease !important;
+  width: 100% !important;
+  max-width: 500px !important;
+  display: inline-block !important;
+  text-align: center !important;
+  font-family: inherit !important;
+}
+
+.custom-hotmart-wrapper a:hover,
+.custom-hotmart-wrapper button:hover {
+  transform: translateY(-3px) scale(1.02) !important;
+  box-shadow: 0 15px 40px rgba(59, 130, 246, 0.6) !important;
+}

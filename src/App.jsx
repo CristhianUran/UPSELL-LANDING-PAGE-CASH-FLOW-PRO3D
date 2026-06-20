@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { 
   AlertTriangle, PlayCircle, BarChart, Users, DollarSign, Calculator, ArrowRight
@@ -20,6 +20,18 @@ const staggerContainer = {
 };
 
 function App() {
+  useEffect(() => {
+    if (window.checkoutElements) {
+      window.checkoutElements.init('salesFunnel').mount('#hotmart-sales-funnel');
+    } else {
+      const timer = setTimeout(() => {
+        if (window.checkoutElements) {
+          window.checkoutElements.init('salesFunnel').mount('#hotmart-sales-funnel');
+        }
+      }, 1000);
+      return () => clearTimeout(timer);
+    }
+  }, []);
   return (
     <div style={{ paddingBottom: '4rem', position: 'relative' }}>
       
@@ -196,9 +208,8 @@ function App() {
             </div>
           </div>
 
-          <a href="https://pay.hotmart.com/N106107776G" className="cta-button" style={{ marginBottom: '1.5rem' }}>
-            SÍ, AÑADIR EL DASHBOARD BUSINESS A MI ORDEN <ArrowRight />
-          </a>
+          {/* HOTMART WIDGET CONTAINER */}
+          <div id="hotmart-sales-funnel" className="custom-hotmart-wrapper" style={{ marginBottom: '1.5rem', display: 'flex', justifyContent: 'center' }}></div>
 
           <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
             (Esta es una One-Time-Offer. No estará disponible más adelante a este precio).
