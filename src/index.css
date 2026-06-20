@@ -1,0 +1,261 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --bg-dark: #080C16; /* Deep Corporate Navy */
+  --bg-dark-secondary: #0F172A; /* Slate */
+  --bg-card: rgba(15, 23, 42, 0.6);
+  --accent-blue: #3B82F6; /* Bright Blue */
+  --accent-violet: #8B5CF6; /* Neon Violet */
+  --accent-green: #10B981; /* Success Green */
+  --accent-red: #EF4444; /* Alert Red */
+  --text-main: #F8FAFC;
+  --text-muted: #94A3B8;
+  --border-light: rgba(148, 163, 184, 0.1);
+  --border-accent: rgba(59, 130, 246, 0.3);
+  --shadow-glow: 0 0 25px rgba(59, 130, 246, 0.15);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5 {
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
+h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); }
+
+.text-gradient {
+  background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-violet) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-blue { color: var(--accent-blue); }
+.text-violet { color: var(--accent-violet); }
+.text-green { color: var(--accent-green); }
+.text-red { color: var(--accent-red); }
+.text-muted { color: var(--text-muted); }
+
+/* Layout */
+.container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.section-padding {
+  padding: 6rem 0;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .grid-2 { grid-template-columns: 1fr; gap: 3rem; }
+  .grid-reverse-mobile > div:nth-child(1) { order: 2; }
+  .grid-reverse-mobile > div:nth-child(2) { order: 1; }
+  .section-padding { padding: 4rem 0; }
+}
+
+/* Glassmorphism Cards */
+.glass-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
+  padding: 2.5rem;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--border-accent);
+  box-shadow: var(--shadow-glow);
+}
+
+/* Progress Bar */
+.progress-container {
+  background-color: var(--bg-dark-secondary);
+  border-bottom: 1px solid var(--border-light);
+  padding: 1.5rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+
+.progress-bar-wrapper {
+  background: rgba(255,255,255,0.05);
+  border-radius: 50px;
+  height: 12px;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto 0.5rem auto;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-bar-fill {
+  background: linear-gradient(90deg, var(--accent-blue), var(--accent-green));
+  height: 100%;
+  width: 66%; /* Paso 2 de 3 */
+  border-radius: 50px;
+  box-shadow: 0 0 10px var(--accent-blue);
+  position: relative;
+}
+
+.progress-bar-fill::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(45deg, rgba(255,255,255,0.2) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.2) 75%, transparent 75%, transparent);
+  background-size: 20px 20px;
+  animation: stripe-animation 1s linear infinite;
+}
+
+@keyframes stripe-animation {
+  0% { background-position: 0 0; }
+  100% { background-position: 20px 0; }
+}
+
+/* Buttons */
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: linear-gradient(to right, var(--accent-blue), #2563EB);
+  color: #fff;
+  padding: 1.2rem 2.5rem;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
+  transition: all 0.3s ease;
+  width: 100%;
+  max-width: 500px;
+}
+
+.cta-button:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 15px 40px rgba(59, 130, 246, 0.6);
+}
+
+.decline-link {
+  display: inline-block;
+  margin-top: 1.5rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  text-decoration: underline;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.decline-link:hover {
+  color: var(--text-main);
+}
+
+/* Alert Box */
+.alert-box {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  animation: pulse-red 2s infinite;
+}
+
+@keyframes pulse-red {
+  0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+  70% { box-shadow: 0 0 0 15px rgba(239, 68, 68, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
+/* Shooting Stars Animation */
+.shooting-stars-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0; /* Above the image, below the text */
+  pointer-events: none;
+}
+
+.star {
+  position: absolute;
+  width: 150px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent-violet), #fff);
+  animation: shootingStar 6s linear infinite;
+  opacity: 0;
+  filter: drop-shadow(0 0 10px var(--accent-violet));
+}
+
+.star::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 4px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 15px 4px var(--accent-violet);
+}
+
+.star:nth-child(1) { top: -10%; left: 20%; animation-delay: 0s; }
+.star:nth-child(2) { top: 15%; left: -10%; animation-delay: 1.5s; }
+.star:nth-child(3) { top: 40%; left: -20%; animation-delay: 3s; }
+.star:nth-child(4) { top: 60%; left: 80%; animation-delay: 4.5s; }
+.star:nth-child(5) { top: 80%; left: -10%; animation-delay: 2.2s; }
+.star:nth-child(6) { top: 25%; left: 60%; animation-delay: 5.1s; }
+
+@keyframes shootingStar {
+  0% {
+    transform: rotate(35deg) translateX(-100vw);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  20% {
+    transform: rotate(35deg) translateX(100vw);
+    opacity: 0;
+  }
+  100% {
+    transform: rotate(35deg) translateX(100vw);
+    opacity: 0;
+  }
+}
