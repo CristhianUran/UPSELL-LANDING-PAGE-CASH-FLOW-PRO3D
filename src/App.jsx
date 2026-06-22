@@ -218,7 +218,7 @@ function App() {
 
         {/* 8. DECLINE LINK */}
         <div className="text-center" style={{ marginTop: '2rem' }}>
-          <a href="#" className="decline-link">
+          <a href="https://landing-de-gracias-cash-flow-pro-3d-icw5frszq.vercel.app" className="decline-link">
             No gracias. Pasaré por alto esta oferta única. Prefiero intentar adaptar mi rastreador personal para mi negocio, perder horas cuadrando números a fin de mes y seguir adivinando cuánto puedo pagarme de sueldo.
           </a>
         </div>
