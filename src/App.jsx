@@ -112,9 +112,16 @@ function App() {
           </div>
 
           <div className="text-center">
-            <a href="#buy-section" className="cta-button" style={{ fontSize: '1.15rem', padding: '1.4rem 2rem', boxShadow: '0 15px 40px rgba(59, 130, 246, 0.5)' }}>
+            <button 
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById('buy-section')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="cta-button" 
+              style={{ fontSize: '1.15rem', padding: '1.4rem 2rem', boxShadow: '0 15px 40px rgba(59, 130, 246, 0.5)', width: '100%', maxWidth: '500px', display: 'inline-flex', justifyContent: 'center', alignItems: 'center', gap: '10px' }}
+            >
               SÍ, AÑADIR EL DASHBOARD BUSINESS A MI ORDEN <ArrowRight size={24} />
-            </a>
+            </button>
             <p style={{ marginTop: '1rem', fontSize: '0.95rem', color: 'var(--text-muted)', fontWeight: 500 }}>
               Solo $27.00 - Un único pago. Cero suscripciones mensuales.
             </p>
