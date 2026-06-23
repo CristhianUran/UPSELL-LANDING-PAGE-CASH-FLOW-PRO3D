@@ -112,7 +112,7 @@ function App() {
           </div>
 
           <div className="text-center">
-            <a href="https://pay.hotmart.com/N106107776G" className="cta-button" style={{ fontSize: '1.15rem', padding: '1.4rem 2rem', boxShadow: '0 15px 40px rgba(59, 130, 246, 0.5)' }}>
+            <a href="#buy-section" className="cta-button" style={{ fontSize: '1.15rem', padding: '1.4rem 2rem', boxShadow: '0 15px 40px rgba(59, 130, 246, 0.5)' }}>
               SÍ, AÑADIR EL DASHBOARD BUSINESS A MI ORDEN <ArrowRight size={24} />
             </a>
             <p style={{ marginTop: '1rem', fontSize: '0.95rem', color: 'var(--text-muted)', fontWeight: 500 }}>
@@ -208,12 +208,14 @@ function App() {
             </div>
           </div>
 
-          {/* HOTMART WIDGET CONTAINER */}
-          <div id="hotmart-sales-funnel" className="custom-hotmart-wrapper" style={{ marginBottom: '1.5rem', display: 'flex', justifyContent: 'center' }}></div>
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="text-center" id="buy-section" style={{ marginBottom: '2rem' }}>
+            {/* HOTMART SALES FUNNEL WIDGET */}
+            <div id="hotmart-sales-funnel" className="custom-hotmart-wrapper" style={{ marginBottom: '1.5rem', display: 'flex', justifyContent: 'center' }}></div>
 
-          <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
-            (Esta es una One-Time-Offer. No estará disponible más adelante a este precio).
-          </p>
+            <p className="text-muted" style={{ fontSize: '0.9rem' }}>
+              (Esta es una One-Time-Offer. No estará disponible más adelante a este precio).
+            </p>
+          </motion.div>
         </motion.div>
 
         {/* 8. DECLINE LINK */}
