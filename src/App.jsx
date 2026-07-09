@@ -20,6 +20,9 @@ const staggerContainer = {
 };
 
 function App() {
+  const [isVideoLoaded, setIsVideoLoaded] = React.useState(false);
+  const YOUTUBE_VIDEO_ID = "2M3_UeTsJ3g";
+
   useEffect(() => {
     if (window.checkoutElements) {
       window.checkoutElements.init('salesFunnel').mount('#hotmart-sales-funnel');
@@ -103,12 +106,34 @@ function App() {
         {/* 3. VSL PLACEHOLDER */}
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} style={{ marginBottom: '4rem' }}>
           <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, borderRadius: '12px', overflow: 'hidden', boxShadow: '0 20px 40px rgba(0,0,0,0.5)', border: '1px solid var(--border-accent)', marginBottom: '2rem', background: '#000' }}>
-            <iframe 
-              src="https://www.youtube.com/embed/2M3_UeTsJ3g?autoplay=1&mute=0&controls=0&rel=0&modestbranding=1&showinfo=0&loop=1&playlist=2M3_UeTsJ3g" 
-              style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 'none' }}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-              allowFullScreen
-            ></iframe>
+            {isVideoLoaded ? (
+              <iframe 
+                src={`https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?autoplay=1&mute=0&controls=0&rel=0&modestbranding=1&showinfo=0&loop=1&playlist=${YOUTUBE_VIDEO_ID}`} 
+                style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 'none' }}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowFullScreen
+              ></iframe>
+            ) : (
+              <div 
+                onClick={() => setIsVideoLoaded(true)}
+                style={{ 
+                  position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', 
+                  backgroundImage: `url(https://img.youtube.com/vi/${YOUTUBE_VIDEO_ID}/maxresdefault.jpg), url(https://img.youtube.com/vi/${YOUTUBE_VIDEO_ID}/hqdefault.jpg)`,
+                  backgroundSize: 'cover', backgroundPosition: 'center',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  cursor: 'pointer'
+                }}
+              >
+                <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.3)' }}></div>
+                <PlayCircle 
+                  size={80} 
+                  color="#3B82F6" 
+                  style={{ position: 'relative', zIndex: 2, filter: 'drop-shadow(0 0 20px rgba(59,130,246,0.6))', transition: 'transform 0.2s ease' }} 
+                  onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.1)'} 
+                  onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'} 
+                />
+              </div>
+            )}
           </div>
 
           <div className="text-center">
