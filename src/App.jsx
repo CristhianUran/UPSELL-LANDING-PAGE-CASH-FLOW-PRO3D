@@ -21,7 +21,7 @@ const staggerContainer = {
 
 function App() {
   const [isVideoLoaded, setIsVideoLoaded] = React.useState(false);
-  const YOUTUBE_VIDEO_ID = "2M3_UeTsJ3g";
+  const YOUTUBE_VIDEO_ID = "_RE_gwXTfxw";
 
   useEffect(() => {
     if (window.checkoutElements) {
