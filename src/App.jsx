@@ -19,9 +19,21 @@ const staggerContainer = {
   }
 };
 
+const CHECKOUT_UPSELL_URL = "https://pay.hotmart.com/N106107776G?bid=1780841555782";
+
 function App() {
   const [isVideoLoaded, setIsVideoLoaded] = React.useState(false);
   const YOUTUBE_VIDEO_ID = "ZqkC0fF4n2k";
+
+  // Detect if user came from a Hotmart sales funnel session
+  const hasFunnelParams = typeof window !== 'undefined' && Boolean(
+    window.location.search && (
+      window.location.search.includes('token') || 
+      window.location.search.includes('transaction') || 
+      window.location.search.includes('order') ||
+      window.location.search.includes('funnel')
+    )
+  );
 
   useEffect(() => {
     if (window.checkoutElements) {
@@ -35,15 +47,30 @@ function App() {
       return () => clearTimeout(timer);
     }
   }, []);
+
+  const handleBuyClick = (e) => {
+    // If inside an active Hotmart sales funnel with the 1-click widget iframe present
+    const funnelContainer = document.getElementById('hotmart-sales-funnel');
+    const iframe = funnelContainer?.querySelector('iframe');
+    
+    if (hasFunnelParams && iframe) {
+      e.preventDefault();
+      document.getElementById('buy-section')?.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      // Direct checkout fallback for standalone visits, testing and instant purchase
+      window.location.href = CHECKOUT_UPSELL_URL;
+    }
+  };
+
   return (
     <div style={{ paddingBottom: '4rem', position: 'relative' }}>
       
-      {/* BACKGROUND IMAGE */}
+      {/* BACKGROUND IMAGE (Optimized WebP) */}
       <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: -1, overflow: 'hidden' }}>
         <div style={{ 
           position: 'absolute', 
           inset: 0, 
-          backgroundImage: 'url(/upsell-bg.png)', 
+          backgroundImage: 'url(/upsell-bg.webp)', 
           backgroundSize: 'cover', 
           backgroundPosition: 'center top', 
           opacity: 0.4,
@@ -137,16 +164,21 @@ function App() {
           </div>
 
           <div className="text-center">
-            <button 
-              onClick={(e) => {
-                e.preventDefault();
-                document.getElementById('buy-section')?.scrollIntoView({ behavior: 'smooth' });
+            <a 
+              href={CHECKOUT_UPSELL_URL}
+              onClick={handleBuyClick}
+              className="cta-button pulse-button" 
+              style={{ 
+                boxShadow: '0 15px 40px rgba(59, 130, 246, 0.5)', 
+                display: 'inline-flex', 
+                justifyContent: 'center', 
+                alignItems: 'center', 
+                gap: '10px',
+                textDecoration: 'none'
               }}
-              className="cta-button" 
-              style={{ fontSize: '1.15rem', padding: '1.4rem 2rem', boxShadow: '0 15px 40px rgba(59, 130, 246, 0.5)', width: '100%', maxWidth: '540px', display: 'inline-flex', justifyContent: 'center', alignItems: 'center', gap: '10px' }}
             >
               SIM, ADICIONAR O MODO BUSINESS AO MEU ACESSO <ArrowRight size={24} />
-            </button>
+            </a>
             <p style={{ marginTop: '1rem', fontSize: '0.95rem', color: 'var(--text-muted)', fontWeight: 500 }}>
               Apenas R$ 97,00 à vista (ou 12x) — Pagamento Único sem mensalidades.
             </p>
@@ -236,13 +268,40 @@ function App() {
           <div style={{ marginBottom: '2.5rem' }}>
             <p style={{ fontWeight: 600, color: 'var(--text-main)', marginBottom: '1rem' }}>Veja como fica o seu novo painel de controle executivo:</p>
             <div style={{ borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--border-accent)', boxShadow: '0 20px 40px rgba(0,0,0,0.5)' }}>
-              <img src="/mockup-upsell.jpg" alt="Mockup Dashboard Business" style={{ width: '100%', display: 'block' }} />
+              <img 
+                src="/mockup-upsell.webp" 
+                alt="Mockup Dashboard Business" 
+                loading="lazy" 
+                decoding="async" 
+                style={{ width: '100%', display: 'block' }} 
+              />
             </div>
           </div>
 
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="text-center" id="buy-section" style={{ marginBottom: '2rem' }}>
             {/* HOTMART SALES FUNNEL WIDGET */}
             <div id="hotmart-sales-funnel" className="custom-hotmart-wrapper" style={{ marginBottom: '1.5rem', display: 'flex', justifyContent: 'center' }}></div>
+
+            {/* DIRECT FALLBACK CTA (Shown when tested directly or if Hotmart widget is not in a 1-click session) */}
+            {!hasFunnelParams && (
+              <div style={{ marginBottom: '1.5rem' }}>
+                <a 
+                  href={CHECKOUT_UPSELL_URL}
+                  className="cta-button pulse-button" 
+                  style={{ 
+                    background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
+                    boxShadow: '0 15px 40px rgba(16, 185, 129, 0.4)', 
+                    display: 'inline-flex', 
+                    justifyContent: 'center', 
+                    alignItems: 'center', 
+                    gap: '10px',
+                    textDecoration: 'none'
+                  }}
+                >
+                  SIM, ADICIONAR O MODO BUSINESS AO MEU ACESSO <ArrowRight size={24} />
+                </a>
+              </div>
+            )}
 
             <p className="text-muted" style={{ fontSize: '0.9rem' }}>
               (Esta é uma condição exclusiva de 1 clique. Não estará disponível posteriormente por este valor).
