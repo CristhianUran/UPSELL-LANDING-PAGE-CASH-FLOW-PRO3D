@@ -164,9 +164,11 @@ function App() {
           </div>
 
           <div className="text-center">
-            <a 
-              href={CHECKOUT_UPSELL_URL}
-              onClick={handleBuyClick}
+            <button 
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById('buy-section')?.scrollIntoView({ behavior: 'smooth' });
+              }}
               className="cta-button pulse-button" 
               style={{ 
                 boxShadow: '0 15px 40px rgba(59, 130, 246, 0.5)', 
@@ -174,11 +176,11 @@ function App() {
                 justifyContent: 'center', 
                 alignItems: 'center', 
                 gap: '10px',
-                textDecoration: 'none'
+                cursor: 'pointer'
               }}
             >
               SIM, ADICIONAR O MODO BUSINESS AO MEU ACESSO <ArrowRight size={24} />
-            </a>
+            </button>
             <p style={{ marginTop: '1rem', fontSize: '0.95rem', color: 'var(--text-muted)', fontWeight: 500 }}>
               Apenas R$ 97,00 à vista (ou 12x) — Pagamento Único sem mensalidades.
             </p>
@@ -281,27 +283,6 @@ function App() {
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="text-center" id="buy-section" style={{ marginBottom: '2rem' }}>
             {/* HOTMART SALES FUNNEL WIDGET */}
             <div id="hotmart-sales-funnel" className="custom-hotmart-wrapper" style={{ marginBottom: '1.5rem', display: 'flex', justifyContent: 'center' }}></div>
-
-            {/* DIRECT FALLBACK CTA (Shown when tested directly or if Hotmart widget is not in a 1-click session) */}
-            {!hasFunnelParams && (
-              <div style={{ marginBottom: '1.5rem' }}>
-                <a 
-                  href={CHECKOUT_UPSELL_URL}
-                  className="cta-button pulse-button" 
-                  style={{ 
-                    background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
-                    boxShadow: '0 15px 40px rgba(16, 185, 129, 0.4)', 
-                    display: 'inline-flex', 
-                    justifyContent: 'center', 
-                    alignItems: 'center', 
-                    gap: '10px',
-                    textDecoration: 'none'
-                  }}
-                >
-                  SIM, ADICIONAR O MODO BUSINESS AO MEU ACESSO <ArrowRight size={24} />
-                </a>
-              </div>
-            )}
 
             <p className="text-muted" style={{ fontSize: '0.9rem' }}>
               (Esta é uma condição exclusiva de 1 clique. Não estará disponível posteriormente por este valor).
