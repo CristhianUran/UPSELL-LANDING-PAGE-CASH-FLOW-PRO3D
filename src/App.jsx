@@ -290,13 +290,6 @@ function App() {
           </motion.div>
         </motion.div>
 
-        {/* 8. DECLINE LINK */}
-        <div className="text-center" style={{ marginTop: '2rem' }}>
-          <a href="https://landing-de-gracias-cash-flow-pro-3d.vercel.app/" className="decline-link">
-            Não, obrigado. Prefiro abrir mão desta oportunidade única. Continuarei misturando meu dinheiro pessoal com o da empresa, perdendo horas fechando o mês no escuro e tentando adivinhar quanto posso retirar de pró-labore.
-          </a>
-        </div>
-
       </div>
 
       {/* 9. FOOTER LEGAL & DISCLAIMER */}
