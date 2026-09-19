@@ -19,7 +19,7 @@ const staggerContainer = {
   }
 };
 
-const CHECKOUT_UPSELL_URL = "https://pay.hotmart.com/N106107776G?bid=1780841555782";
+const CHECKOUT_UPSELL_URL = "https://pay.hotmart.com/N106107776G?off=5fw3kzr7";
 
 function App() {
   const [isVideoLoaded, setIsVideoLoaded] = React.useState(false);
