@@ -23,7 +23,7 @@ const CHECKOUT_UPSELL_URL = "https://pay.hotmart.com/N106107776G?off=5fw3kzr7";
 
 function App() {
   const [isVideoLoaded, setIsVideoLoaded] = React.useState(false);
-  const YOUTUBE_VIDEO_ID = "ZqkC0fF4n2k";
+  const YOUTUBE_VIDEO_ID = "f40x_BnjN9I"; // ID do vídeo vertical da VSL de Upsell (Shorts / 9:16)
 
   // Detect if user came from a Hotmart sales funnel session
   const hasFunnelParams = typeof window !== 'undefined' && Boolean(
@@ -130,14 +130,26 @@ function App() {
           </motion.p>
         </motion.div>
 
-        {/* 3. VSL PLACEHOLDER */}
+        {/* 3. VSL YOUTUBE VERTICAL 9:16 */}
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} style={{ marginBottom: '4rem' }}>
-          <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, borderRadius: '12px', overflow: 'hidden', boxShadow: '0 20px 40px rgba(0,0,0,0.5)', border: '1px solid var(--border-accent)', marginBottom: '2rem', background: '#000' }}>
+          <div style={{ 
+            position: 'relative', 
+            maxWidth: '400px', 
+            width: '100%', 
+            margin: '0 auto 2rem auto', 
+            paddingBottom: '177.77%', 
+            height: 0, 
+            borderRadius: '24px', 
+            overflow: 'hidden', 
+            boxShadow: '0 25px 60px rgba(0,0,0,0.8), 0 0 35px rgba(59, 130, 246, 0.3)', 
+            border: '2px solid rgba(59, 130, 246, 0.4)', 
+            background: '#000' 
+          }}>
             {isVideoLoaded ? (
               <iframe 
-                src={`https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?autoplay=1&mute=0&controls=0&rel=0&modestbranding=1&showinfo=0&loop=1&playlist=${YOUTUBE_VIDEO_ID}`} 
+                src={`https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?autoplay=1&mute=0&controls=1&rel=0&modestbranding=1&showinfo=0&loop=1&playlist=${YOUTUBE_VIDEO_ID}&playsinline=1`} 
                 style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 'none' }}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                 allowFullScreen
               ></iframe>
             ) : (
@@ -147,18 +159,33 @@ function App() {
                   position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', 
                   backgroundImage: `url(https://img.youtube.com/vi/${YOUTUBE_VIDEO_ID}/maxresdefault.jpg), url(https://img.youtube.com/vi/${YOUTUBE_VIDEO_ID}/hqdefault.jpg)`,
                   backgroundSize: 'cover', backgroundPosition: 'center',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
                   cursor: 'pointer'
                 }}
               >
-                <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.3)' }}></div>
-                <PlayCircle 
-                  size={80} 
-                  color="#3B82F6" 
-                  style={{ position: 'relative', zIndex: 2, filter: 'drop-shadow(0 0 20px rgba(59,130,246,0.6))', transition: 'transform 0.2s ease' }} 
-                  onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.1)'} 
-                  onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'} 
-                />
+                <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.35)' }}></div>
+                <div style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '14px', padding: '0 20px', textAlign: 'center' }}>
+                  <PlayCircle 
+                    size={76} 
+                    color="#3B82F6" 
+                    style={{ filter: 'drop-shadow(0 0 25px rgba(59,130,246,0.85))', transition: 'transform 0.2s ease' }} 
+                    onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.12)'} 
+                    onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'} 
+                  />
+                  <span style={{ 
+                    background: 'rgba(0,0,0,0.8)', 
+                    color: '#FFF', 
+                    padding: '8px 18px', 
+                    borderRadius: '20px', 
+                    fontSize: '0.85rem', 
+                    fontWeight: 700, 
+                    border: '1px solid rgba(59,130,246,0.4)', 
+                    letterSpacing: '0.5px',
+                    boxShadow: '0 4px 15px rgba(0,0,0,0.5)'
+                  }}>
+                    TOQUE PARA ASSISTIR À APRESENTAÇÃO
+                  </span>
+                </div>
               </div>
             )}
           </div>
